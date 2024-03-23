@@ -26,6 +26,20 @@ public class MainMenuSwitcher : MonoBehaviour
     private int nb_frame = 0;
     private float cibleAngle = 0;
 
+    [Header("Save and Reset")]
+    public BoxCollider GrabCollider;
+    public Button SaveResetOP_Button;
+    bool isOPSaved = false;
+
+    private void OnEnable()
+    {
+        SaveResetOP_Button.onClick.AddListener(SaveOP_ButtonAction);
+    }
+
+    private void OnDisable()
+    {
+        SaveResetOP_Button.onClick.RemoveListener(SaveOP_ButtonAction);
+    }
     void Start()
     {
         grabScaleWorldObject.SetActive(true);
@@ -147,5 +161,21 @@ public class MainMenuSwitcher : MonoBehaviour
     {
         grabScaleWorldObject.SetActive(true);
         mainUiObject.SetActive(false);
+    }
+
+    public void SaveOP_ButtonAction()
+    {
+        if (!isOPSaved)
+        {
+            isOPSaved = true;
+            GrabCollider.enabled = false;
+            SaveResetOP_Button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Reset OP";
+        }
+        else
+        {
+            isOPSaved = false;
+            GrabCollider.enabled = true;
+            SaveResetOP_Button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Save OP";
+        }
     }
 }
