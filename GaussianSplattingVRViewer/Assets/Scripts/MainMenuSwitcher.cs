@@ -29,16 +29,21 @@ public class MainMenuSwitcher : MonoBehaviour
     [Header("Save and Reset")]
     public BoxCollider GrabCollider;
     public Button SaveResetOP_Button;
+    public Button DefaultOP_Button;
+    public GameObject XRRig;
     bool isOPSaved = false;
 
     private void OnEnable()
     {
         SaveResetOP_Button.onClick.AddListener(SaveOP_ButtonAction);
+        DefaultOP_Button.onClick.AddListener(DefaultButtonAction);
+
     }
 
     private void OnDisable()
     {
         SaveResetOP_Button.onClick.RemoveListener(SaveOP_ButtonAction);
+        DefaultOP_Button.onClick.RemoveListener(DefaultButtonAction);
     }
     void Start()
     {
@@ -54,6 +59,12 @@ public class MainMenuSwitcher : MonoBehaviour
 
     private void Update()
     {
+        if(Input.GetKeyUp(KeyCode.R))
+        {
+            DefaultButtonAction();
+        }
+
+
         //Quit application on keyboard action
         if (Keyboard.current.qKey.wasReleasedThisFrame) { QuitApplication(); }
         if (Keyboard.current.escapeKey.wasReleasedThisFrame) { QuitApplication(); }
@@ -163,6 +174,48 @@ public class MainMenuSwitcher : MonoBehaviour
         mainUiObject.SetActive(false);
     }
 
+    public void DataLoaded_CallBack()
+    {
+        if(SplatDataManager.Instance.Dat != null)
+        if(SplatDataManager.Instance.Dat.SplatObjects.Count>0)
+        {
+                isOPSaved = true;
+                GrabCollider.enabled = false;
+                SaveResetOP_Button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Reset OP";
+
+                gs.CanEditValues = false;
+
+
+                //Taking the first values
+                DefaultButtonAction();
+        }
+            else
+            {
+                gs.CanEditValues = true;
+            }
+    }
+
+    void DefaultButtonAction()
+    {
+        var dat = SplatDataManager.Instance.Dat;
+
+        grabScaleWorldObject.transform.position = dat.SplatObjects[0].GrabInitPosition;
+        grabScaleWorldObject.transform.rotation = dat.SplatObjects[0].GrabInitRotation;
+        grabScaleWorldObject.transform.localScale = dat.SplatObjects[0].GrabInitScale;
+
+
+        gs.transform.position = dat.SplatObjects[0].SplatInitPosition;
+        gs.transform.rotation = dat.SplatObjects[0].SplatInitRotation;
+        gs.transform.localScale = dat.SplatObjects[0].SplatInitScale;
+
+        gs.renderScale = dat.SplatObjects[0].SplatRenderScale;
+
+        XRRig.transform.position = dat.SplatObjects[0].UserInitPosition;
+
+        Debug.Log("Data Loaded");
+
+    }
+
     public void SaveOP_ButtonAction()
     {
         if (!isOPSaved)
@@ -170,12 +223,18 @@ public class MainMenuSwitcher : MonoBehaviour
             isOPSaved = true;
             GrabCollider.enabled = false;
             SaveResetOP_Button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Reset OP";
+            gs.CanEditValues = false;
+            //Save to the file
+            SplatDataManager.Instance.SaveSplatData(XRRig.transform.position, gs.transform.position, gs.transform.rotation,gs.transform.localScale, 
+                grabScaleWorldObject.transform.position,grabScaleWorldObject.transform.rotation, grabScaleWorldObject.transform.localScale,gs.renderScale, "01","point_cloud.ply");
         }
         else
         {
             isOPSaved = false;
             GrabCollider.enabled = true;
             SaveResetOP_Button.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Save OP";
+
+            gs.CanEditValues = true;
         }
     }
 }

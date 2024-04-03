@@ -150,13 +150,29 @@ public class GaussianSplatting : MonoBehaviour
         mat.SetTexture("_GaussianSplattingTexRightEye", blackTexture);
     }
 
+    public bool CanEditValues = true;
+    public void OpenForEdits()
+    {
+        CanEditValues = true;
+    }
+
+    public void ClosedForEdits()
+    {
+        CanEditValues = false;
+    }
+
+
+
     private void Update()
     {
         if (trackTRS != null)
         {
-            renderScale = trackTRS.localScale.x;
-            transform.localPosition = trackTRS.localPosition / renderScale;
-            transform.localRotation = trackTRS.localRotation;
+            if (CanEditValues)
+            {
+                renderScale = trackTRS.localScale.x;
+                transform.localPosition = trackTRS.localPosition / renderScale;
+                transform.localRotation = trackTRS.localRotation;
+            }
         }
 
         //If thread is finished set it to null
