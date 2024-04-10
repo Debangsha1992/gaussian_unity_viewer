@@ -2,14 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SplatOrientationController : MonoBehaviour
+public class SplatController : MonoBehaviour
 {
     public List<GaussianSplatting> _splatters = new List<GaussianSplatting>();
 
     private GaussianSplatting _currentSplat = null;
 
+    private bool _busy = false;
+
     public IEnumerator EnableSplat(SplatObject sObject)
     {
+        if(_busy)
+        {
+            Debug.Log("Splat already changing this frame.");
+            yield break;
+        }
+
+        _busy = true;
+
         if(_currentSplat)
             _currentSplat.gameObject.SetActive(false);
 
@@ -21,10 +31,18 @@ public class SplatOrientationController : MonoBehaviour
             {
                 _currentSplat = x;
                 _currentSplat.gameObject.SetActive(true);
-                _currentSplat.transform.position = sObject.SplatInitPosition;
-                _currentSplat.transform.rotation = sObject.SplatInitRotation;
-                _currentSplat.transform.localScale = sObject.SplatInitScale;
             }
         });
+
+        yield return 0;
+
+        _currentSplat.transform.position = sObject.SplatInitPosition;
+        _currentSplat.transform.rotation = sObject.SplatInitRotation;
+        _currentSplat.transform.localScale = sObject.SplatInitScale;
+
+        if (_currentSplat == null)
+            Debug.Log("No splat found by UID");
+
+        _busy = false;
     }
 }
