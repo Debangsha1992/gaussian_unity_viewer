@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641252, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -456,7 +456,7 @@ MonoBehaviour:
   menuObject: {fileID: 462134824}
   loadingObject: {fileID: 11229111}
   menuDeadZoneRotation: 60
-  gs: {fileID: 624403322}
+  gs: {fileID: 0}
   fpsText: {fileID: 1507550166}
   resolutionText: {fileID: 2113538376}
   resolutionPercent: {fileID: 1925567819}
@@ -1606,6 +1606,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 561099215}
   m_CullTransparentMesh: 1
+--- !u!1 &565075462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 565075463}
+  m_Layer: 0
+  m_Name: Splats
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &565075463
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565075462}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.18715477, y: 2.175102, z: -2.7472956}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &569527915 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 424857288364750090, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
@@ -1844,74 +1875,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &624403321
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 624403323}
-  - component: {fileID: 624403322}
-  m_Layer: 0
-  m_Name: GaussianSplatting
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &624403322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 624403321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0175542fb2a37414fbbad9401af663b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model_file_path: point_cloud.ply
-  default_model: {fileID: 4900000, guid: f1d3ca99166c0b249ad02e13e9d07677, type: 3}
-  mat: {fileID: 2100000, guid: d59cb04912b19fa418c3013c48cdaf83, type: 2}
-  cam: {fileID: 1996825539}
-  isXr: 1
-  trackTRS: {fileID: 735471141}
-  initCrop: 1
-  loadModelEvent: 1
-  sendInitEvent: 1
-  sendDrawEvent: 1
-  renderScale: 1
-  texFactor: 0.5
-  cropMin: {x: 0, y: 0, z: 0}
-  cropMax: {x: 1, y: 1, z: 1}
-  loaded: 0
-  initialized: 0
-  nb_splats: 0
-  lastMessage: 
-  internalTexSize: {x: 0, y: 0}
-  tex: []
-  isInError: 0
-  sceneMin: {x: 0, y: 0, z: 0}
-  sceneMax: {x: 1, y: 1, z: 1}
-  CanEditValues: 0
---- !u!4 &624403323
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 624403321}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &630717430
 GameObject:
   m_ObjectHideFlags: 0
@@ -5092,7 +5055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc6b5d249c138ec4c8b5633fe1d655b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gs: {fileID: 624403322}
+  gs: {fileID: 0}
 --- !u!20 &1996825539 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 9014170783809206330, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
@@ -5419,8 +5382,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 705507995}
   - {fileID: 1996825536}
-  - {fileID: 624403323}
   - {fileID: 157154629}
   - {fileID: 148850933}
   - {fileID: 1037722591}
   - {fileID: 2099630108}
+  - {fileID: 565075463}

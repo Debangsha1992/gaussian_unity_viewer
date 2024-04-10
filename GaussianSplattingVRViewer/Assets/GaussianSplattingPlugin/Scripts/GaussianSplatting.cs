@@ -32,6 +32,7 @@ public class GaussianSplatting : MonoBehaviour
     }
 
     [Header("Init Parameters")]
+    public string UID = "";
     public string model_file_path = "";
     public TextAsset default_model;
     public Material mat;
