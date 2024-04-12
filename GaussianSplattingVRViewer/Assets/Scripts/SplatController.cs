@@ -10,6 +10,23 @@ public class SplatController : MonoBehaviour
 
     private bool _busy = false;
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SplatObject obj = new SplatObject();
+            obj.UID = "1";
+            StartCoroutine(EnableSplat(obj));
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SplatObject obj = new SplatObject();
+            obj.UID = "2";
+            StartCoroutine(EnableSplat(obj));
+        }
+    }
+
     public IEnumerator EnableSplat(SplatObject sObject)
     {
         if(_busy)
