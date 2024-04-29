@@ -10,13 +10,19 @@ public class CarouselViewManager : MonoBehaviour
     public float CenterOffsetMin = 0;
     public float CenterOffsetMax = 0;
     public float scaleSpeed = 5f;
-    public RectTransform[] items;
+    public List<RectTransform> items = new List<RectTransform>();
+
+    public bool CanScroll = false;
 
     private void Start()
     {
     }
     private void Update()
     {
+        if(!CanScroll)
+        return;
+
+
         if (scrollViewViewport == null)
         {
             Debug.LogWarning("ScrollViewViewport is not assigned in ScaleCenterItem.");
