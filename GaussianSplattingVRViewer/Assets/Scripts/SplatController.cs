@@ -6,6 +6,7 @@ using UnityEngine;
 public class SplatController : MonoBehaviour
 {
     [SerializeField] private GaussianSplatting _splatPrefab;
+    [SerializeField] private Transform _grabTRS;
 
     private GaussianSplatting _currentSplat;
     private bool _busy;
@@ -27,6 +28,7 @@ public class SplatController : MonoBehaviour
 
         yield return 0;
 
+        //?make sure this is the correct place to be getting this data.
         SplatObject data = SplatDataManager.Instance.Dat.SplatObjects.First(x => x.UID == uid);
 
         GaussianSplatting splatClone = Instantiate(_splatPrefab, data.SplatInitPosition, data.SplatInitRotation, transform);
@@ -34,8 +36,10 @@ public class SplatController : MonoBehaviour
         splatClone.model_file_path = data.SplatFileName;
         splatClone.cam = Camera.main;
         splatClone.renderScale = data.SplatRenderScale;
-        //? how to get the model?
-        splatClone.Init();
+        splatClone.trackTRS = _grabTRS;
+        //splatClone.Init();
+
+        _currentSplat = splatClone;
 
         _busy = false;
     }

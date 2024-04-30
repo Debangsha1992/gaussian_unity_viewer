@@ -98,7 +98,7 @@ public class GaussianSplatting : MonoBehaviour
         return nbfound == 4;
     }
 
-    public void Init()
+    public void Start()
     {
         if (!File.Exists(model_file_path))
         {
