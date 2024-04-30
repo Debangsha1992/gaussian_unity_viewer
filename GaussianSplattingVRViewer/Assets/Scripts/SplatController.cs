@@ -1,64 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SplatController : MonoBehaviour
 {
-    public List<GaussianSplatting> _splatters = new List<GaussianSplatting>();
+    [SerializeField] private GaussianSplatting _splatPrefab;
 
-    private GaussianSplatting _currentSplat = null;
+    private GaussianSplatting _currentSplat;
+    private bool _busy;
 
-    private bool _busy = false;
-
-    private void Update()
+    public void EnableSplat(string uid)
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SplatObject obj = new SplatObject();
-            obj.UID = "1";
-            StartCoroutine(EnableSplat(obj));
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SplatObject obj = new SplatObject();
-            obj.UID = "2";
-            StartCoroutine(EnableSplat(obj));
-        }
+        StartCoroutine(EnableSplatRoutine(uid));
     }
 
-    public IEnumerator EnableSplat(SplatObject sObject)
+    private IEnumerator EnableSplatRoutine(string uid)
     {
-        if(_busy)
-        {
-            Debug.Log("Splat already changing this frame.");
+        if (_busy)
             yield break;
-        }
 
         _busy = true;
 
-        if(_currentSplat)
-            _currentSplat.gameObject.SetActive(false);
+        if (_currentSplat != null)
+            Destroy(_currentSplat.gameObject);
 
         yield return 0;
 
-        _splatters.ForEach(x =>
-        {
-            if (sObject.UID == x.UID)
-            {
-                _currentSplat = x;
-                _currentSplat.gameObject.SetActive(true);
-            }
-        });
+        SplatObject data = SplatDataManager.Instance.Dat.SplatObjects.First(x => x.UID == uid);
 
-        yield return 0;
-
-        _currentSplat.transform.position = sObject.SplatInitPosition;
-        _currentSplat.transform.rotation = sObject.SplatInitRotation;
-        _currentSplat.transform.localScale = sObject.SplatInitScale;
-
-        if (_currentSplat == null)
-            Debug.Log("No splat found by UID");
+        GaussianSplatting splatClone = Instantiate(_splatPrefab, data.SplatInitPosition, data.SplatInitRotation, transform);
+        splatClone.UID = data.UID;
+        splatClone.model_file_path = data.SplatFileName;
+        splatClone.cam = Camera.main;
+        splatClone.renderScale = data.SplatRenderScale;
+        //? how to get the model?
+        splatClone.Init();
 
         _busy = false;
     }

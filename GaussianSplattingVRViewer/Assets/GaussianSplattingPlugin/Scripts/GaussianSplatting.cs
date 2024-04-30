@@ -98,7 +98,7 @@ public class GaussianSplatting : MonoBehaviour
         return nbfound == 4;
     }
 
-    private void Start()
+    public void Init()
     {
         if (!File.Exists(model_file_path))
         {
@@ -210,7 +210,8 @@ public class GaussianSplatting : MonoBehaviour
                 loadModelEvent = false;
                 if (thLoad == null)
                 {
-                    thLoad = new Thread(() => {
+                    thLoad = new Thread(() =>
+                    {
                         loaded = GaussianSplattingNI.LoadModel(model_file_path);
                     });
                     thLoad.Start();
@@ -232,7 +233,7 @@ public class GaussianSplatting : MonoBehaviour
 
                     GaussianSplattingNI.SetNbPov(isXr ? 2 : 1);
                     internalTexSize = new Vector2Int((int)((float)cam.pixelWidth * texFactor), (int)((float)cam.pixelHeight * texFactor));
-                    
+
                     for (int i = 0; i < (isXr ? 2 : 1); ++i)
                     {
                         //Set plugins parameters for pov
@@ -248,7 +249,7 @@ public class GaussianSplatting : MonoBehaviour
                     {
                         Thread.Sleep(0);
                     }
-                    
+
                     initialized = GaussianSplattingNI.IsInitialized();
 
                     if (sw.ElapsedMilliseconds >= 1000)
@@ -382,7 +383,8 @@ public class GaussianSplatting : MonoBehaviour
         }
     }
 
-    void OnPreRenderCallback(Camera camera) {
+    void OnPreRenderCallback(Camera camera)
+    {
         if (loaded && renderEventFunc != System.IntPtr.Zero && sendDrawEvent && waitForTexture)
         {
             waitForTexture = false;
@@ -404,7 +406,9 @@ public class GaussianSplatting : MonoBehaviour
                     //Stop trying...
                     sendDrawEvent = false;
                 }
-            } else {
+            }
+            else
+            {
                 countDrawErrors = 0;
             }
         }
