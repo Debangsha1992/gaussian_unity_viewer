@@ -28,7 +28,6 @@ public class SplatController : MonoBehaviour
 
         yield return 0;
 
-        //?make sure this is the correct place to be getting this data.
         SplatObject data = SplatDataManager.Instance.Dat.SplatObjects.First(x => x.UID == uid);
 
         GaussianSplatting splatClone = Instantiate(_splatPrefab, data.SplatInitPosition, data.SplatInitRotation, transform);
@@ -37,7 +36,6 @@ public class SplatController : MonoBehaviour
         splatClone.cam = Camera.main;
         splatClone.renderScale = data.SplatRenderScale;
         splatClone.trackTRS = _grabTRS;
-        //splatClone.Init();
 
         _currentSplat = splatClone;
 
