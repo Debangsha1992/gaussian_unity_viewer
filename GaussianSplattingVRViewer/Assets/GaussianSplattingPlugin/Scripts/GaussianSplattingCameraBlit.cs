@@ -16,6 +16,12 @@ public class GaussianSplattingCameraBlit : MonoBehaviour
     [ImageEffectOpaque]
     private void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
+        if(gs == null) 
+        {
+            Debug.Log("No GS found in Camra Blit"); 
+            return;
+        }
+
         Material mat = gs.mat;
 
         if (mat == null)

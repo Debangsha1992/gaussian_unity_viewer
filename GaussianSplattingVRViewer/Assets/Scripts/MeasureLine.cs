@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Inputs;
 
 public class MeasureLine : MonoBehaviour
 {
@@ -17,6 +18,12 @@ public class MeasureLine : MonoBehaviour
         if (text == null) { text = GetComponentInChildren<TMPro.TextMeshPro>(true); }
         if (line != null) { line.gameObject.SetActive(false); }
         if (text != null) { text.gameObject.SetActive(false); }
+    }
+
+    private void Start()
+    {
+        left = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<XRInputModalityManager>().leftController.transform;
+        right = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<XRInputModalityManager>().rightController.transform;
     }
 
     void Update()

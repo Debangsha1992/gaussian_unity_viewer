@@ -1,15 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SplatController : MonoBehaviour
 {
     [SerializeField] private GaussianSplatting _splatPrefab;
+    [SerializeField] private GaussianSplattingCameraBlit _cameraBlit;
     [SerializeField] private Transform _grabTRS;
+
+    //! I have exposed the Gaussian Splatting object so that the UI can reference it. 
+    //! The UI should be slightly reworked so that it is checking if this object is null. 
+
+    public GaussianSplatting GetCurrentGS => _currentSplat; 
 
     private GaussianSplatting _currentSplat;
     private bool _busy;
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.A))
+            EnableSplat("01");
+        if(Input.GetKeyDown(KeyCode.S))
+            EnableSplat("02");
+    }
 
     public void EnableSplat(string uid)
     {
@@ -30,7 +45,14 @@ public class SplatController : MonoBehaviour
 
         SplatObject data = SplatDataManager.Instance.Dat.SplatObjects.First(x => x.UID == uid);
 
+        if(data != null)    
+               Debug.Log($"Found data file for splat ID {uid}.");
+        else 
+            Debug.Log($"Did not find data file for splat ID {uid}.");
+
         GaussianSplatting splatClone = Instantiate(_splatPrefab, data.SplatInitPosition, data.SplatInitRotation, transform);
+        _cameraBlit.gs = splatClone;
+        
         splatClone.UID = data.UID;
         splatClone.model_file_path = data.SplatFileName;
         splatClone.cam = Camera.main;
