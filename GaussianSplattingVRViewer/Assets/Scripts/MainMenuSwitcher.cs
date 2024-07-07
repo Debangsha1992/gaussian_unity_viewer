@@ -55,6 +55,7 @@ public class MainMenuSwitcher : MonoBehaviour
         texScaleSlider.value = Mathf.Floor(gs.texFactor * 10);
         fpsText.text = "";
         resolutionText.text = "";
+        XRRig = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Update()
@@ -63,7 +64,6 @@ public class MainMenuSwitcher : MonoBehaviour
         {
             DefaultButtonAction();
         }
-
 
         //Quit application on keyboard action
         if (Keyboard.current.qKey.wasReleasedThisFrame) { QuitApplication(); }

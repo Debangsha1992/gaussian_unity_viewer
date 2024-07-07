@@ -20,7 +20,7 @@ public class SplatUIElement : MonoBehaviour
 
     void ActionButton_Action()
     {
-
+        SplatController.Instance.EnableSplat(UID);
     }
     public void PopulateUI(string Name, string Id)
     {
