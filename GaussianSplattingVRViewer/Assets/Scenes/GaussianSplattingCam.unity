@@ -209,13 +209,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1059140515}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.059088945, y: 0.44197667, z: -0.09551993, w: 0.8899669}
-  m_LocalPosition: {x: -1.27, y: -0.3, z: 0.43}
+  m_LocalRotation: {x: 0, y: 0.3420201, z: 0, w: 0.9396927}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 40, z: 0}
 --- !u!114 &1059140519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,8 +273,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0175542fb2a37414fbbad9401af663b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UID: 
   model_file_path: point_cloud.ply
-  default_model: {fileID: 4900000, guid: e06ab9616a0e15447b468b18fed037a6, type: 3}
+  default_model: {fileID: 4900000, guid: f1d3ca99166c0b249ad02e13e9d07677, type: 3}
   mat: {fileID: 2100000, guid: d59cb04912b19fa418c3013c48cdaf83, type: 2}
   cam: {fileID: 1059140517}
   isXr: 0
@@ -296,6 +297,7 @@ MonoBehaviour:
   isInError: 0
   sceneMin: {x: 0, y: 0, z: 0}
   sceneMax: {x: 1, y: 1, z: 1}
+  CanEditValues: 1
 --- !u!1 &1685471551
 GameObject:
   m_ObjectHideFlags: 0

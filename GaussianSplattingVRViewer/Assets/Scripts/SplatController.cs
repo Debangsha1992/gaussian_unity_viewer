@@ -8,11 +8,8 @@ public class SplatController : MonoBehaviour
 {
     public static SplatController Instance;
     [SerializeField] private GaussianSplatting _splatPrefab;
-    //[SerializeField] private GaussianSplattingCameraBlit _cameraBlit;
+    [SerializeField] private GaussianSplattingCameraBlit _cameraBlit;
     [SerializeField] private Transform _grabTRS;
-
-    //! I have exposed the Gaussian Splatting object so that the UI can reference it. 
-    //! The UI should be slightly reworked so that it is checking if this object is null. 
 
     private void Awake()
     {
@@ -25,9 +22,9 @@ public class SplatController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.A))
+        if(Input.GetKeyDown(KeyCode.Alpha1))
             EnableSplat("01");
-        if(Input.GetKeyDown(KeyCode.S))
+        if(Input.GetKeyDown(KeyCode.Alpha2))
             EnableSplat("02");
     }
 
@@ -51,13 +48,15 @@ public class SplatController : MonoBehaviour
         SplatObject data = SplatDataManager.Instance.Dat.SplatObjects.First(x => x.UID == uid);
 
         if(data != null)    
-               Debug.Log($"Found data file for splat ID {uid}.");
+            Debug.Log($"Found data file for splat ID {uid}.");
         else 
             Debug.Log($"Did not find data file for splat ID {uid}.");
 
-        GaussianSplatting splatClone = Instantiate(_splatPrefab, data.SplatInitPosition, data.SplatInitRotation, transform);
-        //_cameraBlit.gs = splatClone;
-        
+        //GaussianSplatting splatClone = Instantiate(_splatPrefab, data.SplatInitPosition, data.SplatInitRotation, transform);
+        GaussianSplatting splatClone = Instantiate(_splatPrefab, Vector3.zero, Quaternion.identity, transform);
+
+        _cameraBlit.SetGS(splatClone);
+
         splatClone.UID = data.UID;
         splatClone.model_file_path = data.SplatFileName;
         splatClone.cam = Camera.main;

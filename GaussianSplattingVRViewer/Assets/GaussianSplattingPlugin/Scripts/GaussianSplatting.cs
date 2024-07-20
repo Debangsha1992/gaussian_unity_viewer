@@ -165,7 +165,7 @@ public class GaussianSplatting : MonoBehaviour
 
 
     private void Update()
-    {
+    {        
         if (trackTRS != null)
         {
             if (CanEditValues)
@@ -280,7 +280,6 @@ public class GaussianSplatting : MonoBehaviour
                         {
                             IntPtr texPtr = GaussianSplattingNI.GetTextureNativePointer(i);
                             tex[i] = Texture2D.CreateExternalTexture(internalTexSize.x, internalTexSize.y, TextureFormat.RGBAFloat, false, true, texPtr);
-
                             mat.SetTexture(i == 0 ? "_GaussianSplattingTexLeftEye" : "_GaussianSplattingTexRightEye", tex[i]);
                         }
                     }
