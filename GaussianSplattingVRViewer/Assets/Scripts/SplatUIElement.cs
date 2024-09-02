@@ -21,6 +21,8 @@ public class SplatUIElement : MonoBehaviour
     void ActionButton_Action()
     {
         SplatController.Instance.EnableSplat(UID);
+
+        SplatSceneManager.instance.DeactivateCarousalMenu();
     }
     public void PopulateUI(string Name, string Id)
     {

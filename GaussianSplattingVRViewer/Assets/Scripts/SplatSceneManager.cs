@@ -4,14 +4,20 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class SceneManager : MonoBehaviour
+public class SplatSceneManager : MonoBehaviour
 {
+    public static SplatSceneManager instance;
     public InputActionReference CarousalMenuActivate;
     public GameObject CarousalView;
     public GameObject ContentParent;
     public GameObject SplatUIObjectPrefab;
     public CarouselViewManager carousel;
-
+    public GaussianSplattingCameraBlit gaussianSplattingCameraBlit;
+    public GameObject ActiveGaussianSplat;
+    private void Awake()
+    {
+        instance = this;
+    }
     private void Start()
     {
         CarousalMenuActivate.action.performed += CarousalMenuActivate_performed;
@@ -24,16 +30,28 @@ public class SceneManager : MonoBehaviour
 
     private void CarousalMenuActivate_performed(InputAction.CallbackContext obj)
     {
-        if(CarousalView.activeInHierarchy)
+        /*if(CarousalView.activeInHierarchy)
         {
-            CarousalView.SetActive(false);
+            DeactivateCarousalMenu();
         }
         else
         {
-            CarousalView.SetActive(true);
-        }
+            ActivateCarousalMenu();
+        }*/
     }
 
+
+    public void ActivateCarousalMenu()
+    {
+        //gaussianSplattingCameraBlit.gs = null;
+;       CarousalView.SetActive(true);
+    }
+
+    public void DeactivateCarousalMenu() 
+    {
+        CarousalView.SetActive(false);
+    }
+    
     public void CallBack_DataLoadedFromJSON()
     {
         

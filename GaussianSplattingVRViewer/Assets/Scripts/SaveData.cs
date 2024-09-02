@@ -5,7 +5,7 @@ using UnityEngine;
 public class SaveData
 {
 
-    public static string filePath = Application.streamingAssetsPath + "/SavedData.JSON";
+    public static string filePath = Application.streamingAssetsPath + "/config.JSON";
     public void SavetoFile(SplatData data)
     {
 

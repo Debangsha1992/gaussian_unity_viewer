@@ -1,0 +1,90 @@
+{
+    "SplatObjects": [
+        {
+            "UID": "01",
+            "SplatFileName": "point_cloud.ply",
+            "SplatAudioFileName": "",
+            "SplatInitPosition": {
+                "x": 0.0,
+                "y": 4.070000171661377,
+                "z": -1.4399999380111695
+            },
+            "SplatInitRotation": {
+                "x": 0.08011478185653687,
+                "y": -0.32682597637176516,
+                "z": 0.06157168745994568,
+                "w": 0.9396676421165466
+            },
+            "SplatInitScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "GrabInitPosition": {
+                "x": 0.0,
+                "y": 4.070000171661377,
+                "z": -1.4399999380111695
+            },
+            "GrabInitRotation": {
+                "x": 0.08011478185653687,
+                "y": -0.32682597637176516,
+                "z": 0.06157168745994568,
+                "w": 0.9396676421165466
+            },
+            "GrabInitScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "SplatRenderScale": 0.36000001430511477,
+            "UserInitPosition": {
+                "x": 0.11258839070796967,
+                "y": 0.7269481420516968,
+                "z": -1.7066974639892579
+            }
+        },
+        {
+            "UID": "123",
+            "SplatFileName": "Room.ply",
+            "SplatAudioFileName": "",
+            "SplatInitPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "SplatInitRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "SplatInitScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "GrabInitPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "GrabInitRotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "GrabInitScale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "SplatRenderScale": 1.0,
+            "UserInitPosition": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        }
+    ]
+}
